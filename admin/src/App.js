@@ -19,6 +19,7 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { Switch, Route, Link, BrowserRouter } from "react-router-dom";
 import Marketing from './components/Marketing';
 import Proizvodi from './components/Proizvodi';
+import Komentari from './components/Komentari';
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -144,7 +145,7 @@ function App(props) {
           <Switch>
             <Route exact path="/marketing" component={Marketing} />
             <Route path="/proizvodi" component={Proizvodi} />
-            <Route path="/komentari" render={() => <div>Komentari</div>} />
+            <Route path="/komentari" component={Komentari} />
           </Switch>
         </main>
       </BrowserRouter>

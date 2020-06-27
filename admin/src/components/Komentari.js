@@ -6,14 +6,16 @@ import AlertSnack from './Alert';
 import '../styles/marketing.css';
 
 
-export default class MarketingTable extends React.Component {
+export default class KomentariTable extends React.Component {
 
 
   state = {
     columns: [
-      { title: 'Naslov paketa', field: 'title' },
-      { title: 'Opis-slider', field: 'description1' },
-      { title: 'Opis-kartice', field: 'description2' }
+      { title: 'Ocjena', field: 'grade' },
+      { title: 'Komentar', field: 'comment' },
+      { title: 'Ime', field: 'name' },
+      { title: 'Posao', field: 'job' },
+
       
     ],
     data: [],
@@ -21,24 +23,26 @@ export default class MarketingTable extends React.Component {
     updateData:[]
   };
   async getData () {
-    const marketing_response = await apiCall.get('/products/marketing');
-    const marketing = marketing_response.data;
-    const data = marketing.map(elem=>{
+    const response = await apiCall.get('/comments');
+    const komentari = response.data;
+    const data = komentari.map(elem=>{
         return(
         {
-            title: elem.title,
-            description1: elem.description1,
-            description2: elem.description2
+            grade: elem.grade,
+            comment: elem.comment,
+            name: elem.name,
+            job: elem.job
         })
     })
-    const dataApi = marketing.map(elem=>{
+    const dataApi = komentari.map(elem=>{
         return(
         {   
             
-            title: elem.title,
-            description1: elem.description1,
-            description2: elem.description2,
-            id:elem.id
+            id:elem.commentid,
+            grade: elem.grade,
+            comment: elem.comment,
+            name: elem.name,
+            job: elem.job
             
         })
     })
@@ -60,14 +64,14 @@ export default class MarketingTable extends React.Component {
                 }
             })
         })
-        
         this.state.dataApi.forEach(elem=>{
-                console.log(elem)
-                if (elem.title === newData.title){
-                    id = elem.id;
-                }
-    
-        })
+            console.log(elem)
+            if (elem.comment === newData.comment){
+                id = elem.id;
+            }
+
+    })
+        
         newUpdate["id"] = id;
         console.log(newUpdate)
         if (this.state.updateData.length >0){
@@ -115,7 +119,7 @@ export default class MarketingTable extends React.Component {
     handleUpdateHome = ()=> {
         const update = this.state.updateData;
         console.log(update)
-        apiCall.put("/admin/products/marketing", {"marketing": update})
+        apiCall.put("/admin/comments", {"comments": update})
         .then((response) => {
             console.log(response);
             let updateData = [];
@@ -143,9 +147,9 @@ export default class MarketingTable extends React.Component {
                             let dataApi = this.state.dataApi;
                             dataApi.forEach(elem=>{
                                     
-                                    if (elem["title"] === oldData["title"]){
+                                    if (elem["comment"] === oldData["comment"]){
                                         
-                                        elem["title"] = newData["title"];
+                                        elem["comment"] = newData["comment"];
                                     }
                             })
                             
@@ -158,7 +162,6 @@ export default class MarketingTable extends React.Component {
                             data[data.indexOf(oldData)] = newData;
                             return { ...prevState, data };
                             });
-                            
                         }
                         }, 600);
                     }),
