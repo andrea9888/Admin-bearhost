@@ -1,0 +1,12 @@
+
+
+.MuiButton-containedPrimary {
+    position: absolute!important;
+    right: 20px!important;
+    margin-top: 30px!important;
+    margin-bottom: 30px!important;
+}
+
+td.MuiTableCell-root > div:nth-child(2){
+    display:none!important;
+}
