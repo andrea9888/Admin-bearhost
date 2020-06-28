@@ -143,7 +143,7 @@ function App(props) {
           <div className={classes.toolbar} />
 
           <Switch>
-            <Route exact path="/marketing" component={Marketing} />
+            <Route exact path="(/|/marketing)" component={Marketing} />
             <Route path="/proizvodi" component={Proizvodi} />
             <Route path="/komentari" component={Komentari} />
           </Switch>

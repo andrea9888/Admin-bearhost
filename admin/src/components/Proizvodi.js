@@ -2,6 +2,7 @@ import React from 'react';
 import MaterialTable from 'material-table';
 import apiCall from '../services/apiCall';
 import Button from '@material-ui/core/Button';
+import Alert from './Alert';
 export default class ProizvodiTable extends React.Component {
   state={
     columns: [
@@ -19,8 +20,21 @@ export default class ProizvodiTable extends React.Component {
     data: [],
     dataApi: [],
     updateData:[],
-    addData:[]
+    addData:[],
+    req:0,
+    success:0,
+    dataUpdated:0
   };
+  componentDidUpdate(){
+    if (this.state.req===1){
+        setTimeout(()=>{this.setState({req:0})}, 3000)
+        
+    }
+    
+}
+showAlert = ()=>{
+    return <Alert success={this.state.success}/>
+}
   async getPackets(){
     const response = await apiCall.get('/products/packets');
     const packets = response.data;
@@ -86,14 +100,17 @@ export default class ProizvodiTable extends React.Component {
     })
     data.forEach((elem)=>{
       Object.keys(elem).forEach(key=>{
-        if (elem[key] === null){
+        if (elem[key] === null||elem[key] === "null"){
           elem[key] = "";
+        }
+        else{
+          console.log(elem[key],key,"------")
         }
       })
     })
     dataApi.forEach((elem)=>{
       Object.keys(elem).forEach(key=>{
-        if (elem[key] === null){
+        if (elem[key] === null||elem[key] === "null"){
           elem[key] = "";
         }
       })
@@ -198,7 +215,12 @@ export default class ProizvodiTable extends React.Component {
         console.log(response);
           let updateData = [];
           this.setState({updateData})
+          this.setState({dataUpdated:1})
+          this.setState({req:1})
+          this.setState({success:1})
       }, (error) => {
+        this.setState({req:1})
+        this.setState({success:0})
         console.log(error);
       });
     const add = this.state.addData;
@@ -213,11 +235,31 @@ export default class ProizvodiTable extends React.Component {
     apiCall.post("/admin/products", {"products": add})
     .then((response) => {
       console.log(response);
-        let addData = [];
-        this.setState({addData})
+        
+        if (this.state.addData.length>0){
+          this.setState({req:1})
+        
+        if(this.state.dataUpdated.length === 1){
+          if(this.state.success === 1){
+            this.setState({success:1});
+          }
+          else{
+            this.setState({success:0});
+          }
+        }
+        else{
+          this.setState({success:1});
+        }}
+
     }, (error) => {
+      if (this.state.addData.length>0){
+      this.setState({req:1})
+      this.setState({success:0});
+      }
       console.log(error);
     });
+    let addData = [];
+        this.setState({addData})
     
 }
   render(){
@@ -281,6 +323,7 @@ export default class ProizvodiTable extends React.Component {
           }}
         />
         <Button variant="contained" color="primary" onClick={this.handleProducts}>Sačuvaj izmjene</Button>
+        {this.state.req === 1?this.showAlert():<div></div>}
       </div>
       );
     }
