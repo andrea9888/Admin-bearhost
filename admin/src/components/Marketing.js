@@ -2,8 +2,8 @@ import React from 'react';
 import MaterialTable from 'material-table';
 import apiCall from '../services/apiCall';
 import Button from '@material-ui/core/Button';
-import AlertSnack from './Alert';
 import '../styles/marketing.css';
+import Alert from './Alert';
 
 
 export default class MarketingTable extends React.Component {
@@ -18,7 +18,9 @@ export default class MarketingTable extends React.Component {
     ],
     data: [],
     dataApi: [],
-    updateData:[]
+    updateData:[], 
+    success: 0,
+    req:0
   };
   async getData () {
     const marketing_response = await apiCall.get('/products/marketing');
@@ -46,6 +48,18 @@ export default class MarketingTable extends React.Component {
     this.setState({dataApi});
     
 } 
+    componentDidUpdate(){
+        if (this.state.req===1){
+            setTimeout(()=>{this.setState({req:0})}, 3000)
+            
+        }
+        
+    }
+    showAlert = ()=>{
+        return <Alert success={this.state.success}/>
+    }
+
+    
     updateData(newData, oldData){
         let newUpdate = {};
         let id;
@@ -119,12 +133,19 @@ export default class MarketingTable extends React.Component {
         .then((response) => {
             console.log(response);
             let updateData = [];
-            this.setState({updateData})
+            this.setState({updateData});
+            this.setState({success:1});
+            this.setState({req:1});
           }, (error) => {
+            
+            this.setState({success:0});
+            this.setState({req:1});
             console.log(error);
           });
         
+        
     }
+    
 
     render(){
         return (
@@ -166,6 +187,8 @@ export default class MarketingTable extends React.Component {
                 }}
                 />
                 <Button variant="contained" color="primary" onClick={this.handleUpdateHome}>Sačuvaj izmjene</Button>
+                {this.state.req === 1?this.showAlert():<div></div>}
+                
             </div>
           );
         }

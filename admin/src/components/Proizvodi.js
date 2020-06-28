@@ -13,7 +13,7 @@ export default class ProizvodiTable extends React.Component {
       { title: 'Cijena 1 (na mjesec/godinu)', field: 'price1'},
       { title:'Cijena 2 (na dvije godine)', field: 'price2'},
       { title:'Cijena 3 (na tri godine)', field: 'price3'},
-      { title:'Ime paketa', field:'packetname'}
+      { title:'Ime paketa in (Dedicated,Shared,Cloud,VPS)', field:'packetname'}
       
     ],
     data: [],
@@ -51,8 +51,10 @@ export default class ProizvodiTable extends React.Component {
     console.log(packets)
     data.forEach(elem=>{
       packets.forEach(elem2=>{
-        if (elem.packetid === elem2.packetname){
-          elem2.packetname = elem.packetname;
+        console.log(elem.packetname)
+        if (elem.packetname === elem2.packetid){
+          
+          elem.packetname = elem2.packetname;
         }
       })
     })
@@ -76,9 +78,23 @@ export default class ProizvodiTable extends React.Component {
     })
     dataApi.forEach(elem=>{
       packets.forEach(elem2=>{
-        if (elem.packetid === elem2.packetname){
-          elem2.packetname = elem.packetname;
-          elem2.packetid = elem.packetid;
+        if (elem.packetname === elem2.packetid){
+          elem.packetname = elem2.packetname;
+          elem.packetid = elem2.packetid;
+        }
+      })
+    })
+    data.forEach((elem)=>{
+      Object.keys(elem).forEach(key=>{
+        if (elem[key] === null){
+          elem[key] = "";
+        }
+      })
+    })
+    dataApi.forEach((elem)=>{
+      Object.keys(elem).forEach(key=>{
+        if (elem[key] === null){
+          elem[key] = "";
         }
       })
     })
@@ -153,20 +169,29 @@ export default class ProizvodiTable extends React.Component {
     }
     addData = (newData) =>{
       console.log(newData)
-      newData.forEach(elem=>{
-        this.state.apiCall.forEach(elem2=>{
+      
+        this.state.dataApi.forEach(elem2=>{
           
             if (newData.packetname === elem2.packetname){
-                newData.packetid = elem2.packetid;
+                newData.id = elem2.packetid;
+                delete newData.packetname;
+
             }
          
-        })
+        
       })
       this.state.addData.push(newData);
       console.log(this.state.addData)
     }
   handleProducts = ()=> {
     const update = this.state.updateData;
+    update.forEach((elem)=>{
+      Object.keys(elem).forEach(key=>{
+        if (elem[key] === ""){
+          elem[key] = null;
+        }
+      })
+    })
     console.log("final", update)
     apiCall.put("/admin/products", {"products": update})
     .then((response) => {
@@ -177,6 +202,13 @@ export default class ProizvodiTable extends React.Component {
         console.log(error);
       });
     const add = this.state.addData;
+    add.forEach((elem)=>{
+      Object.keys(elem).forEach(key=>{
+        if (elem[key] === ""){
+          elem[key] = null;
+        }
+      })
+    })
     console.log(add);
     apiCall.post("/admin/products", {"products": add})
     .then((response) => {

@@ -2,7 +2,7 @@ import React from 'react';
 import MaterialTable from 'material-table';
 import apiCall from '../services/apiCall';
 import Button from '@material-ui/core/Button';
-import AlertSnack from './Alert';
+import Alert from './Alert';
 import '../styles/marketing.css';
 
 
@@ -20,7 +20,9 @@ export default class KomentariTable extends React.Component {
     ],
     data: [],
     dataApi: [],
-    updateData:[]
+    updateData:[],
+    success: 0,
+    req: 0
   };
   async getData () {
     const response = await apiCall.get('/comments');
@@ -110,6 +112,17 @@ export default class KomentariTable extends React.Component {
         
 
     }
+    componentDidUpdate(){
+        if (this.state.req===1){
+            setTimeout(()=>{this.setState({req:0})}, 3000)
+            
+        }
+        
+    }
+    showAlert = ()=>{
+        return <Alert success={this.state.success}/>
+    }
+
   componentDidMount(){
       if(this.state.data.length === 0){
           this.getData();
@@ -124,7 +137,12 @@ export default class KomentariTable extends React.Component {
             console.log(response);
             let updateData = [];
             this.setState({updateData})
+            this.setState({success:1});
+            this.setState({req:1});
           }, (error) => {
+            
+            this.setState({success:0});
+            this.setState({req:1});
             console.log(error);
           });
         
@@ -169,6 +187,7 @@ export default class KomentariTable extends React.Component {
                 }}
                 />
                 <Button variant="contained" color="primary" onClick={this.handleUpdateHome}>Sačuvaj izmjene</Button>
+                {this.state.req === 1?this.showAlert():<div></div>}
             </div>
           );
         }
