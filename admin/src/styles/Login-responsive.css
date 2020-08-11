@@ -1,0 +1,193 @@
+
+
+
+@media screen and (min-width: 451px) and (max-width: 768px) {
+    .form-container {
+        width: 90vw;
+        height: 90vw;
+        right: 7vw;
+        top: 3vh;
+    }
+    .sign-in {
+        padding-top: 18vw;
+        padding-left: 0vw;
+        width: 70%;
+    }
+}
+
+
+
+
+@media screen and (min-width: 651px) and (max-width: 768px) {
+    
+    .form-container {
+        position: absolute;
+        width: 64vw;
+        height: 68vw;
+        right: 22vw;
+        top: 8vh;
+    }
+
+    .sign-in {
+        padding-top: 15vw;
+        padding-left: 2vw;
+    }
+}
+
+@media screen and (min-width: 769px) and (max-width: 950px) {
+    .sign-in {    
+        padding-top: 13vw;
+        padding-left: 5.5vw;
+    }
+    
+    .sign-up-btn {
+        left: 64vw;
+    }
+}
+
+@media screen and (min-width: 951px) and (max-width: 1150px){
+    .sign-in{
+        padding-top: 12vw;
+        padding-left: 4vw;
+    }
+}
+
+@media screen and (min-width: 1151px) and (max-width: 1320px){
+    .sign-in{
+        padding-top: 10vw;
+        padding-left: 4vw;
+    }
+}
+
+@media screen and (min-width: 1320px) and (max-width: 1366px){
+    .sign-in{
+        padding-top: 9vw;
+        padding-left: 3.5vw;
+    }
+
+    
+}
+
+@media screen and (min-width: 1367px){
+    .form-container{
+        height: 600px;   
+    }
+    .sign-in{
+        padding-top: 10vw;
+        padding-left: 4vw;
+    }
+}
+
+
+@media screen and (max-width: 950px){
+    .text {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 950px){
+    .sign-up-btn {
+        left: 10vw;
+        bottom: 8vw;
+    }
+}
+
+
+@media screen and (max-width: 768px){
+    .body-login {
+        background-image: url('../slike/POZADINATELLOGIN.png');
+    }
+    
+
+    .form-container{
+        top: 13vw;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .sign-up-btn{
+        right: 10vw;
+        bottom: 15vw;
+    }
+
+    .sign-in{
+        width: 70%;
+    }
+}
+
+
+@media screen and (max-width: 450px) {
+    .form-container {
+        top: 20vw;
+        width: 90vw;
+        height: 87vh;
+    }
+    .sign-in {    
+        padding-top: 27vw;
+        margin-left: -2vw;
+        width: 100%;
+        
+    }
+
+    .sign-in > {
+        font-size: 2vw;
+    }
+
+    
+}
+
+
+@media screen and (max-width: 345px){
+    .sign-in {    
+        margin-left: -2vw;
+        
+    }
+    .form-container{
+        width: 103vw;
+        height: 75vh;
+    }
+}
+
+@media screen and (max-width: 300px){
+    .sign-in {    
+        width: 102%;
+        height: 80vw;
+        padding-top: 40vw;
+    }
+    .sign-in>*{
+        width: 90vw;
+    }
+    .sign-in>button{
+        width: 40vw;
+        height: 7vh;
+        margin-top: 0;
+    }
+
+    .sign-in>h2{
+        text-align: center;
+    }
+
+    .section-bellow{
+        grid-template-columns: 1fr;
+        justify-items: center;
+
+    }
+
+    .section-checkbox{
+        grid-template-columns: 1fr 3fr;
+    }
+
+    .form-container{
+        width: 343px;
+        height: 82vh;
+        background-size: cover;
+    }
+
+    .sign-up-btn{
+        font-size: 7vw;
+    }
+
+    .sign-up-btn>button{
+        font-size: 7vw;
+        width: 100%;
+    }
+}

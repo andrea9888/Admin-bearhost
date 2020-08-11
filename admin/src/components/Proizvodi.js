@@ -185,19 +185,22 @@ showAlert = ()=>{
 
     }
     addData = (newData) =>{
+      let newD = {};
       console.log(newData)
-      
+      Object.keys(newData).forEach((key)=>{
+        newD[key] = newData[key];
+      })
         this.state.dataApi.forEach(elem2=>{
-          
+            
             if (newData.packetname === elem2.packetname){
-                newData.id = elem2.packetid;
-                delete newData.packetname;
+                newD.id = elem2.packetid;
+                delete newD.packetname;
 
             }
          
         
       })
-      this.state.addData.push(newData);
+      this.state.addData.push(newD);
       console.log(this.state.addData)
     }
   handleProducts = ()=> {
@@ -275,6 +278,7 @@ showAlert = ()=>{
                 setTimeout(() => {
                   resolve();
                   this.addData(newData);
+                  console.log(newData,"!!!!!!");
                   this.setState((prevState) => {
                     const data = [...prevState.data];
                     data.push(newData);

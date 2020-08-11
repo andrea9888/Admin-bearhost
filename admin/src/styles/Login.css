@@ -1,0 +1,199 @@
+.body-login {
+    width: 100%;
+    height: 100vh;
+    background-image: url('../slike/PNG2.png');
+    background-size: 100vw 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+
+.text {
+    position: absolute;
+    width: 40vw;
+    height: 40vh;
+    background-image: url('../slike/DOBRODOSLI.svg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    top: 1vh;
+    left: 1vw;
+}
+
+.sign-in {
+    width: fit-content;
+    height: fit-content;
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    color: rgba(255, 255, 255, 0.808);
+}
+
+.form-container {
+    position: absolute;
+    width: 489px;
+    height: 516px;
+    background-image: url("../slike/login-form-background.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    right: 15vw;
+    top: 8vh;
+}
+
+h2 {
+    font-weight: 400;
+    margin: 0 !important;
+    padding-right: 14px;
+    color: white;
+    height: fit-content;
+}
+
+.input-shape {
+    background-color: transparent;
+    border: 1px solid rgba(0, 0, 0, 0.651);
+    width: 206px;
+    height: 29px;
+    border-radius: 13px;
+    font-size: 15px;
+    line-height: 15px;
+    padding-left: 10px;
+    margin-top: 22px;
+    outline: none;
+    color: white;
+}
+
+.input-shape::placeholder {
+    color: rgba(255, 255, 255, 0.644);
+}
+
+.sign-up-btn {
+    position: absolute;
+    color: white;
+    text-align: center;
+    width: fit-content;
+    bottom: 10vw;
+}
+
+.sign-up-btn>p {
+    margin-bottom: 10px;
+}
+
+.sign-up-btn>button {
+    color: white;
+    width: 189px;
+    height: 40px;
+    line-height: 40px;
+    background-color: transparent;
+    font-size: 21px;
+    outline: none;
+    border: 1px solid black;
+    border-radius: 12px;
+}
+
+.section-bellow {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    align-items: center;
+    grid-gap: 13px;
+    font-size: 11px;
+    height: fit-content;
+    margin-top: 5px;
+    padding-left: 24px;
+}
+
+.section-checkbox {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    align-items: center;
+}
+
+.section-checkbox label {
+    padding-left: 3px;
+}
+
+.signin-btn {
+    width: 77px;
+    height: 28px;
+    background-color: black;
+    color: white;
+    border: 1px solid black;
+    border-radius: 15px;
+    margin-top: 15px;
+}
+
+.keep-checkbtn {
+    width: 13px;
+    height: 13px;
+    background-color: transparent;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0);
+    color: black;
+    appearance: none;
+    border: 1px solid rgba(0, 0, 0, 0.541);
+    outline: none;
+    margin-right: 0;
+}
+
+.keep-checkbtn:checked {
+    background: url('../slike/tick.png');
+    background-size: 100% 100%;
+}
+
+.keep-label {
+    cursor: pointer;
+}
+
+button {
+    outline: none;
+}
+
+.error-singin {
+    margin-top: 0;
+}
+
+.hidden {
+    display: none;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    box-shadow: 0 0 0 30px #009fe3 inset !important;
+}
+
+input:-webkit-autofill {
+    -webkit-text-fill-color: white !important;
+}
+
+.mask{
+    z-index: 4;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.603);
+}
+
+.notifications{
+    position: fixed;
+    top: 0;
+    right: 10px;
+    width: 220px;
+    height: 100vh;
+    display: grid;
+    padding-top: 2vw;
+    z-index: 4;
+}
+
+.notification{
+    height: fit-content;
+    padding: 16px;
+    border-radius: 20px;
+    background-color: rgb(51, 51, 51);
+    color: white;
+}
+
+.fp-link{
+    color: white;
+}
